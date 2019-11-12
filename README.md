@@ -3,11 +3,11 @@
 
 ## Dynamic Array 
 ## Linked List
-    <ul>
-    <li> Single Link List</li>
-    <li> Single Circular Link List</li>
-    <li> Double Link List</li>
-    <li> Double Circular Link List</li>
-    </ul>
+   \begin{itemize}
+    \item Single Link List
+    \item Single Circular Link List
+    \item Double Link List
+    \item Double Circular Link List
+   \end{itemize}
 ## Stack
 ## Queue
