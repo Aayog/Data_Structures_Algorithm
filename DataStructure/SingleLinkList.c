@@ -1,12 +1,13 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-typedef struct node_struct{
+typedef struct node_struct
+{
     int data;
-    struct node_struct* next;
+    struct node_struct *next;
 } node;
 
-node* head = NULL;
+node *head = NULL;
 int size = 0;
 
 void insert(int number);
@@ -16,11 +17,13 @@ void update(int position, int number);
 void display();
 int getSize();
 int menu();
-node* getNode(int num);
+node *getNode(int num);
 
-int main(){
+int main()
+{
     int ch;
-    while(1){
+    while (1)
+    {
         ch = menu();
         int num, pos;
         switch (ch)
@@ -45,27 +48,27 @@ int main(){
         case 4:
             printf("Enter the number to delete: ");
             scanf("%d", &num);
-            delete(num);
+            delete (num);
             break;
         case 5:
             display();
             break;
         case 6:
-            printf("The array size is %d.\n",getSize());
+            printf("The array size is %d.\n", getSize());
             break;
         case 7:
-            exit(0);    
+            exit(0);
         default:
             break;
         }
     }
-
 }
 
-
-int menu(){
+int menu()
+{
     int choice;
-    do{
+    do
+    {
         printf(" 1)Insert a number.\n");
         printf(" 2)Search a number.\n");
         printf(" 3)Update a number.\n");
@@ -74,80 +77,72 @@ int menu(){
         printf(" 6)Get size.\n");
         printf(" 7)Exit\n");
         printf("Enter your choice: ");
-        scanf("%d",&choice);
-    }while(choice < 1 || choice > 7);
+        scanf("%d", &choice);
+    } while (choice < 1 || choice > 7);
     return choice;
 }
 
-
-
-
-
-node* getNode(int num){
-    node* temp = (node*) (malloc(sizeof(node)));
+node *getNode(int num)
+{
+    node *temp = (node *)(malloc(sizeof(node)));
     temp->data = num;
     temp->next = NULL;
     return temp;
 }
 
-
 void insert(int number)
 {
-    node* temp = head;
-    node* newnode = getNode(number);
+    node *newnode = getNode(number);
     if (head == NULL)
     {
         head = newnode;
     }
     else
     {
-        int i = 0;
-        while(temp->next != NULL)
+        node *temp = head;
+        while (temp->next != NULL)
         {
             temp = temp->next;
         }
         temp->next = newnode;
     }
-    size++; 
+    size++;
 }
 
 void delete(int num)
 {
-    node* temp = head;
-    size--;
+    node *temp = head;
     if (head == NULL)
     {
         printf("Array is Empty.\n");
         return;
     }
-    if (head->data == num){
-        node* tmp = head;
-        if(head->next == NULL){
-            head = NULL;
-        }else{
-            head = head->next;
-        }
+    if (head->data == num)
+    {
+        node *tmp = head;
+        head = head->next;
         free(tmp);
+        size--;
         return;
     }
-    temp = temp->next;
     while (temp->next != NULL)
     {
-        if( temp->next->data == num){
-            node* tmp = temp->next;
+        if (temp->next->data == num)
+        {
+            node *tmp = temp->next;
             temp->next = temp->next->next;
             free(tmp);
+            size--;
             return;
         }
         temp = temp->next;
     }
-    size++;
     printf("%d not found.\n", num);
 }
 
 void search(int num)
 {
-    node* temp = head;
+    node *temp = head;
     if (head == NULL)
     {
         printf("Array is Empty.\n");
@@ -156,37 +151,58 @@ void search(int num)
     int i = 0;
     while (temp != NULL)
     {
-        if( temp->data == num){
+        if (temp->data == num)
+        {
             printf("%d found in position %d.\n", num, i);
             return;
         }
         i++;
         temp = temp->next;
     }
-    printf("%d not found.\n", num); 
+    printf("%d not found.\n", num);
 }
 
 void update(int position, int number)
 {
-    node* temp = head;
+    node *temp = head;
     if (head == NULL)
     {
         printf("Array is Empty.\n");
         return;
     }
-    node* newnode = getNode(number);
-    if(position == 0){
-        if(head->next != NULL)
+    node *newnode = getNode(number);
+    if (position == 0)
+    {
+        if (head->next != NULL)
             newnode->next = head->next;
         head = newnode;
         return;
     }
-
+    int i = 0;
+    while (temp != NULL)
+    {
+        if (i == position - 1)
+        {
+            if (temp->next == NULL)
+            {
+                temp->next = newnode;
+            }
+            else
+            {
+                newnode->next = temp->next->next;
+                temp->next = newnode;
+            }
+            return;
+        }
+        i++;
+        temp = temp->next;
+    }
+    printf("Error: Invalid position.\n");
 }
 
 void display()
 {
-    node* temp = head;
+    node *temp = head;
     if (head == NULL)
     {
         printf("Array is Empty.\n");
@@ -196,7 +212,7 @@ void display()
     {
         printf("%d ", temp->data);
         temp = temp->next;
-    }        
+    }
     printf("\n");
 }
 
