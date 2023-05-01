@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node_struct
-{
+typedef struct node_struct {
     int data;
     struct node_struct *next;
 } node;
@@ -16,6 +15,7 @@ void search(int num);
 void update(int position, int number);
 void display();
 int getSize();
+void flush_input_buffer();
 int menu();
 node *getNode(int num);
 
@@ -29,26 +29,26 @@ int main()
         switch (ch)
         {
         case 1:
-            printf("Enter number to insert: ");
+            printf("Enter number to insert: \n");
             scanf("%d", &num);
             insert(num);
             break;
         case 2:
-            printf("Enter a number to search: ");
+            printf("Enter a number to search: \n");
             scanf("%d", &num);
             search(num);
             break;
         case 3:
-            printf("Enter the position to enter the number: ");
+            printf("Enter the position to enter the number: \n");
             scanf("%d", &pos);
-            printf("Enter the number to update in position %d: ", pos);
+            printf("Enter the number to update in position %d: \n", pos);
             scanf("%d", &num);
             update(pos, num);
             break;
         case 4:
-            printf("Enter the number to delete: ");
+            printf("Enter the number to delete: \n");
             scanf("%d", &num);
-            delete (num);
+            delete(num);
             break;
         case 5:
             display();
@@ -93,15 +93,11 @@ node *getNode(int num)
 void insert(int number)
 {
     node *newnode = getNode(number);
-    if (head == NULL)
-    {
+    if (head == NULL) {
         head = newnode;
-    }
-    else
-    {
+    } else {
         node *temp = head;
-        while (temp->next != NULL)
-        {
+        while (temp->next != NULL) {
             temp = temp->next;
         }
         temp->next = newnode;
@@ -112,23 +108,19 @@ void insert(int number)
 void delete(int num)
 {
     node *temp = head;
-    if (head == NULL)
-    {
+    if (head == NULL) {
         printf("Array is Empty.\n");
         return;
     }
-    if (head->data == num)
-    {
+    if (head->data == num) {
         node *tmp = head;
         head = head->next;
         free(tmp);
         size--;
         return;
     }
-    while (temp->next != NULL)
-    {
-        if (temp->next->data == num)
-        {
+    while (temp->next != NULL) {
+        if (temp->next->data == num) {
             node *tmp = temp->next;
             temp->next = temp->next->next;
             free(tmp);
@@ -143,12 +135,12 @@ void delete(int num)
 void search(int num)
 {
     node *temp = head;
-    if (head == NULL)
-    {
+    if (head == NULL) {
         printf("Array is Empty.\n");
         return;
     }
-    int i = 0;
+    int
+ i = 0;
     while (temp != NULL)
     {
         if (temp->data == num)
@@ -202,21 +194,30 @@ void update(int position, int number)
 
 void display()
 {
-    node *temp = head;
     if (head == NULL)
     {
-        printf("Array is Empty.\n");
+        printf("Array is empty.\n");
         return;
     }
+    printf("The linked list is: ");
+    node *temp = head;
     while (temp != NULL)
     {
-        printf("%d ", temp->data);
+        printf("%d", temp->data);
+        if (temp->next != NULL) // if not the last node
+            printf(" -> ");
         temp = temp->next;
     }
     printf("\n");
 }
 
+
 int getSize()
 {
     return size;
+}
+
+void flush_input_buffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
