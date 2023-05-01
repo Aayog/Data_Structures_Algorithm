@@ -1,9 +1,12 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int total = 0;
+#define INITIAL_CAPACITY 4
+#define GROWTH_FACTOR 2
+
+int *array;
+int capacity = 0;
 int size = 0;
-int* array;
 
 void insert(int number);
 void delete(int num);
@@ -12,28 +15,30 @@ void update(int position, int number);
 void display();
 int getSize();
 
-int menu(){
+int menu()
+{
     int choice;
-    do{
-        printf(" 1)Insert a number.\n");
-        printf(" 2)Search a number.\n");
-        printf(" 3)Update a number.\n");
-        printf(" 4)Delete a number.\n");
-        printf(" 5)Display the array.\n");
-        printf(" 6)Get size.\n");
-        printf(" 7)Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d",&choice);
-    }while(choice < 1 || choice > 7);
+    printf("\n1) Insert a number.\n");
+    printf("2) Search a number.\n");
+    printf("3) Update a number.\n");
+    printf("4) Delete a number.\n");
+    printf("5) Display the array.\n");
+    printf("6) Get size.\n");
+    printf("7) Exit.\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
     return choice;
 }
 
-int main(){
-    int ch;
-    while(1){
-        ch = menu();
-        int num, pos;
-        switch (ch)
+int main()
+{
+    array = calloc(INITIAL_CAPACITY, sizeof(int));
+    capacity = INITIAL_CAPACITY;
+    int choice, num, pos;
+    while (1)
+    {
+        choice = menu();
+        switch (choice)
         {
         case 1:
             printf("Enter number to insert: ");
@@ -46,61 +51,51 @@ int main(){
             search(num);
             break;
         case 3:
-            printf("Enter the position to enter the number: ");
+            printf("Enter the position to update: ");
             scanf("%d", &pos);
-            printf("Enter the number to update in position %d: ", pos);
+            printf("Enter the new number: ");
             scanf("%d", &num);
             update(pos, num);
             break;
         case 4:
             printf("Enter the number to delete: ");
             scanf("%d", &num);
-            delete(num);
+            delete (num);
             break;
         case 5:
             display();
             break;
         case 6:
-            printf("The array size is %d.\n",getSize());
+            printf("The array size is %d.\n", getSize());
             break;
         case 7:
-            exit(0);    
+            exit(0);
         default:
             break;
         }
     }
-
 }
 
-
-void insert(int number){
-    if (size == 0){
-        array = (int*)(malloc(sizeof(int)*1));
-        array[0] = number;
-        total++;
-    }else if(size <= total){
-        array[size] = number;
-    }else{
-        total *= 2;
-        int* temp = array;
-        array = realloc(array, sizeof(int)*total);
-        int i = 0;
-        for(i = 0; i < size; i++){
-            array[i] = temp[i];
+void insert(int number) {
+    if (size == capacity) {
+        capacity *= GROWTH_FACTOR;
+        int *new_array = realloc(array, capacity * sizeof(int));
+        if (new_array == NULL) {
+            printf("Error: Memory allocation failed.\n");
+            exit(1);
         }
-        array[i] = number;
+        array = new_array;
     }
+    array[size] = number;
     size++;
 }
 
-
-void delete(int num){
-    int i = 0;
-    for(i = 0; i < size; i++){
-        if(array[i] == num){
-            int j;
-            for (j = i; j < size-1; j++){
-                array[j] = array[j+1];
+void delete(int num) {
+    int i, j;
+    for (i = 0; i < size; i++) {
+        if (array[i] == num) {
+            for (j = i; j < size - 1; j++) {
+                array[j] = array[j + 1];
             }
             size--;
             return;
@@ -109,10 +104,10 @@ void delete(int num){
     printf("%d not found.\n", num);
 }
 
-void search(int num){
-    int i = 0;
-    for(i = 0; i < size; i++){
-        if(array[i] == num){
+void search(int num) {
+    int i;
+    for (i = 0; i < size; i++) {
+        if (array[i] == num) {
             printf("%d found in position %d.\n", num, i);
             return;
         }
@@ -120,22 +115,23 @@ void search(int num){
     printf("%d not found.\n", num);
 }
 
-void update(int position, int number){
-    if(position < 0 || position > size){
-        printf("The position is not in the array.\n");
+void update(int position, int number) {
+    if (position < 0 || position >= size) {
+        printf("Error: Invalid position.\n");
         return;
     }
     array[position] = number;
 }
 
-void display(){
+void display() {
     int i;
-    for(i = 0; i < size; i++){
+    printf("Array contents:\n");
+    for (i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
     printf("\n");
 }
 
-int getSize(){
+int getSize() {
     return size;
 }
