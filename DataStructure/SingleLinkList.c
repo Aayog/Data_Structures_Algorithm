@@ -76,7 +76,7 @@ int menu()
         printf(" 5)Display the array.\n");
         printf(" 6)Get size.\n");
         printf(" 7)Exit\n");
-        printf("Enter your choice: ");
+        printf("Enter your choice:\n");
         scanf("%d", &choice);
     } while (choice < 1 || choice > 7);
     return choice;
