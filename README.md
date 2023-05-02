@@ -21,6 +21,9 @@ A stack is a linear data structure that follows the Last-In-First-Out (LIFO) pri
 ### Queue
 
 A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle. It has two main operations: enqueue, which adds an element to the back of the queue, and dequeue, which removes the front element from the queue. We implemented a queue using a circular linked list as its underlying data structure, enabling efficient insertion and deletion operations without the need for additional memory allocation.
+
+--- 
+
 ## Non-Linear Data Structures
 ### Binary Tree
 
@@ -32,56 +35,57 @@ A binary search tree is a special type of binary tree where the left child of a 
 
 A trie, also known as a digital tree or prefix tree, is a non-linear data structure used for efficient retrieval of keys. It is typically used for searching for strings in a large set of strings. We implemented a trie using pointers and dynamic memory allocation. Each node in the trie represents a character, and each path from the root to a leaf node represents a unique string. This structure allows for efficient string searching, insertion, and deletion operations while minimizing memory usage.
 
+---
+
 ## Implementing algorithms
 
 ### Sorting algorithms:
-
-    * Bubble sort
-    * Selection sort
-    * Insertion sort
-    * Merge sort
-    * Quick sort
-    * Heap sort
+- [ ] Bubble sort
+- [ ] Selection sort
+- [ ] Insertion sort
+- [ ] Merge sort
+- [ ] Quick sort
+- [ ] Heap sort
 
 ### Searching algorithms:
 
-    * Linear search
-    * Binary search
+- [ ] Linear search
+- [ ] Binary search
 
 ### Graph algorithms:
 
-    * Breadth-first search (BFS)
-    * Depth-first search (DFS)
-    * Dijkstra's algorithm
-    * Bellman-Ford algorithm
-    * Floyd-Warshall algorithm
-    * Prim's algorithm
-    * Kruskal's algorithm
+- [ ] Breadth-first search (BFS)
+- [ ] Depth-first search (DFS)
+- [ ] Dijkstra's algorithm
+- [ ] Bellman-Ford algorithm
+- [ ] Floyd-Warshall algorithm
+- [ ] Prim's algorithm
+- [ ] Kruskal's algorithm
 
 ### Dynamic programming:
 
-    * Fibonacci series
-    * Longest common subsequence (LCS)
-    * Knapsack problem
-    * Coin change problem
-    * Edit distance
+- [ ] Fibonacci series
+- [ ] Longest common subsequence (LCS)
+- [ ] Knapsack problem
+- [ ] Coin change problem
+- [ ] Edit distance
 
 ### Tree traversal algorithms:
 
-    * Pre-order traversal
-    * In-order traversal
-    * Post-order traversal
+- [ ] Pre-order traversal
+- [ ] In-order traversal
+- [ ] Post-order traversal
 
 ### String manipulation algorithms:
 
-    * Palindrome checking
-    * Anagram checking
-    * String reversal
-    * String matching (KMP algorithm, Boyer-Moore algorithm)
+- [ ] Palindrome checking
+- [ ] Anagram checking
+- [ ] String reversal
+- [ ] String matching (KMP algorithm, Boyer-Moore algorithm)
 
 ### Bit manipulation algorithms:
 
-    * Bitwise AND, OR, XOR operations
-    * Bitwise left and right shift operations
-    * Counting set bit
+- [ ] Bitwise AND, OR, XOR operations
+- [ ] Bitwise left and right shift operations
+- [ ] Counting set bit
 #### Questions from Cracking the coding interview
